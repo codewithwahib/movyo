@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import NavBar from '@/app/Components/Navbar';
+import Link from 'next/link';
 import Footer from '@/app/Components/Footer';
 import { Download, Lock, AlertCircle, Shield, Zap, Key, File, Eye, EyeOff, FileText, Mail, MessageSquare } from 'lucide-react'
 import { useParams } from 'next/navigation'
@@ -192,12 +193,12 @@ export default function DownloadPage() {
           <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Error</h1>
           <p className="text-gray-600 mb-6">{error}</p>
-          <a
+          <Link
             href="/"
             className="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
           >
             Go Back
-          </a>
+          </Link>
         </div>
       </div>
     )

@@ -1,6 +1,7 @@
 "use client";
 
 import { Shield, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -30,29 +31,29 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
+                <Link href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
+                <Link href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
                   Upload Files
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
+                <Link href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
                   Download Files
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
+                <Link href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/Contact" className="text-gray-600 hover:text-black text-sm transition-colors">
+                <Link href="/Contact" className="text-gray-600 hover:text-black text-sm transition-colors">
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -124,15 +125,15 @@ export default function Footer() {
             </p>
             
             <div className="flex gap-6">
-              <a href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
+              <Link href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
                 Privacy Policy
-              </a>
-              <a href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
+              </Link>
+              <Link href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
                 Terms of Service
-              </a>
-              <a href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
+              </Link>
+              <Link href="/" className="text-gray-600 hover:text-black text-sm transition-colors">
                 Security
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -34,7 +34,6 @@ export async function POST(
       )
     }
     
-    // Fetch the secure file document from Sanity
     const query = `*[_type == "secureFile" && _id == $id][0]{
       _id,
       password,
@@ -64,7 +63,6 @@ export async function POST(
       )
     }
     
-    // Verify password
     if (fileData.password !== password) {
       return NextResponse.json(
         { error: 'Invalid password' },
@@ -72,7 +70,6 @@ export async function POST(
       )
     }
     
-    // Check if file is expired
     const now = new Date()
     const expiresAt = new Date(fileData.expiresAt)
     
@@ -83,7 +80,6 @@ export async function POST(
       )
     }
     
-    // Check download count (max 3 downloads)
     const currentDownloadCount = fileData.downloadCount || 0
     if (currentDownloadCount >= 3) {
       return NextResponse.json(
@@ -92,10 +88,8 @@ export async function POST(
       )
     }
     
-    // Create a ZIP file
     const zip = new JSZip()
     
-    // Download and add each file to the ZIP
     for (const file of fileData.files) {
       if (!file.asset?.url) {
         console.warn('File missing asset URL:', file)
@@ -103,7 +97,6 @@ export async function POST(
       }
       
       try {
-        // Download the file from Sanity CDN
         const response = await fetch(file.asset.url)
         if (!response.ok) {
           throw new Error(`Failed to fetch file: ${response.statusText}`)
@@ -111,10 +104,8 @@ export async function POST(
         
         const arrayBuffer = await response.arrayBuffer()
         
-        // Determine filename
         let fileName = file.title || file.asset.originalFilename || 'file'
         
-        // Add extension if missing
         if (file.asset.mimeType) {
           const ext = getExtensionFromMimeType(file.asset.mimeType)
           if (ext && !fileName.endsWith(ext)) {
@@ -122,7 +113,6 @@ export async function POST(
           }
         }
         
-        // Add file to zip
         zip.file(fileName, arrayBuffer)
         
       } catch (error) {
@@ -131,13 +121,11 @@ export async function POST(
       }
     }
     
-    // Generate ZIP as Blob (FIXED HERE)
     const zipBlob = await zip.generateAsync({ 
       type: 'blob',
       compression: 'DEFLATE'
     })
     
-    // Update download count in Sanity
     const newDownloadCount = currentDownloadCount + 1
     await client
       .patch(id)
@@ -148,10 +136,8 @@ export async function POST(
       })
       .commit()
     
-    // Convert Blob to ArrayBuffer for Response
     const arrayBuffer = await zipBlob.arrayBuffer()
     
-    // Return the ZIP file (FIXED HERE)
     return new Response(arrayBuffer, {
       status: 200,
       headers: {
@@ -173,7 +159,6 @@ export async function POST(
   }
 }
 
-// Helper function to get file extension from mime type
 function getExtensionFromMimeType(mimeType: string): string {
   const mimeMap: Record<string, string> = {
     'image/jpeg': '.jpg',
