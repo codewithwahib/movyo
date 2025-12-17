@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/client": "^6.29.1",
+    "@sanity/icons": "^2.11.8",
     "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^4.21.1",
+    "@sanity/vision": "^4.22.0",
     "jszip": "^3.10.1",
     "lucide-react": "^0.561.0",
-    "next": "14.2.13",
+    "next": "^14.2.13",
     "next-sanity": "^9.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
